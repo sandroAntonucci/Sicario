@@ -44,7 +44,7 @@ public class BaseBullet : MonoBehaviour
         if (isEnemyBullet)
         {
             Vector3 playerDirection = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
-            rb.velocity = playerDirection * speed * 0.5f;
+            rb.velocity = playerDirection * speed * 0.1f;
         }
 
         else

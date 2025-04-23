@@ -24,6 +24,12 @@ public class AIAttackingState : AIBaseState
         bool isInVision = handler.IsPlayerInVision();
         GameObject playerObject = handler.GetPlayerObject();
 
+        if (playerObject.GetComponent<PlayerDeath>().isDead)
+        {
+            gun.StopShooting();
+            return;
+        }
+
         if (!isInRange && !isInVision)
         {
             gun.StopShooting();

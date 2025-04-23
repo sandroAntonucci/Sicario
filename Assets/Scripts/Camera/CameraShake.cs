@@ -13,6 +13,9 @@ public class CameraStep : MonoBehaviour
 
     private void Update()
     {
+
+        if (player.GetComponent<PlayerDeath>().isDead) return;
+
         HandleCameraBobbing();
 
         // Follow the player's height while applying bobbing
