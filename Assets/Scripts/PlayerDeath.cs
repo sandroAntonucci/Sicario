@@ -8,11 +8,12 @@ public class PlayerDeath : MonoBehaviour
 
     public Volume deathEffect;
     public GameObject playerInterface;
+    public GameObject deathInterface;
     public bool isDead = false;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<BaseBullet>().isEnemyBullet)
+        if (collision.gameObject.GetComponent<BaseBullet>().isEnemyBullet && collision.gameObject.GetComponent<BaseBullet>().canDamage)
         {
             isDead = true;
             StartCoroutine(Death());
@@ -21,6 +22,8 @@ public class PlayerDeath : MonoBehaviour
 
     private IEnumerator Death()
     {
+
+        Time.timeScale = 0.5f;
 
         playerInterface.SetActive(false);
 
@@ -46,7 +49,7 @@ public class PlayerDeath : MonoBehaviour
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
 
         float time = 0f;
-        float duration = 0.3f;
+        float duration = 0.1f;
 
         while (time < duration)
         {
@@ -54,6 +57,8 @@ public class PlayerDeath : MonoBehaviour
             deathEffect.weight = Mathf.Lerp(0f, 1f, time / duration);
             yield return null;
         }
+
+        deathInterface.SetActive(true);
 
     }
 
