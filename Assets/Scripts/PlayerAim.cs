@@ -12,6 +12,8 @@ public class PlayerAim : MonoBehaviour
 
     [SerializeField] private GameObject marker;
 
+    private System.Action<InputAction.CallbackContext> aimCallback;
+
     private InputAction aimAction;
 
     private GunSway gunSway;
@@ -25,25 +27,39 @@ public class PlayerAim : MonoBehaviour
     {
         aimAction = PlayerControls.FindActionMap("Player").FindAction("Aim");
 
-        aimAction.performed += ctx => Aim();
-
         gunSway = itemHolder.GetComponent<GunSway>();
     }
 
     private void OnEnable()
     {
         aimAction.Enable();
+
+        aimCallback = ctx => Aim(); // store it ONCE
+        aimAction.performed += aimCallback;
     }
 
     private void OnDisable()
     {
+        aimAction.performed -= aimCallback; // remove the exact same instance
+
         aimAction.Disable();
+
+        if (aimCoroutine != null)
+        {
+            StopCoroutine(aimCoroutine);
+            aimCoroutine = null;
+        }
     }
 
     private void Aim()
     {
 
-        if (!PickUpController.slotFull || PickUpController.weaponEquipped.gameObject.GetComponent<BaseWeapon>().isMelee) return;
+        var weapon = PickUpController.weaponEquipped;
+
+        if (!PickUpController.slotFull || weapon == null || weapon.gameObject == null) return;
+
+        var baseWeapon = weapon.gameObject.GetComponent<BaseWeapon>();
+        if (baseWeapon == null || baseWeapon.isMelee) return;
 
         if (aimCoroutine != null) StopCoroutine(aimCoroutine);
 

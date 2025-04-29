@@ -54,9 +54,13 @@ public class PickUpController : InteractableItem
 
     private void PickUp()
     {
-        if (weaponEquipped != null)
+        if (weaponEquipped)
         {
             weaponEquipped.Drop();
+        }
+        else
+        {
+            weaponEquipped = null; // Clean up the reference to the destroyed object
         }
 
         equipped = true;
@@ -97,6 +101,13 @@ public class PickUpController : InteractableItem
 
     private void Drop()
     {
+        if (this == null || weaponEquipped == null || weaponEquipped.gameObject == null)
+        {
+            Debug.LogWarning("Attempted to drop a destroyed weapon.");
+            return;
+        }
+
+        // Continue with the rest of the logic to drop the weapon.
         equipped = false;
         slotFull = false;
 
@@ -127,7 +138,6 @@ public class PickUpController : InteractableItem
         var aim = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAim>();
         if (aim.isAiming)
         {
-            Debug.Log("Resetting aim");
             aim.ResetAim();
         }
 
