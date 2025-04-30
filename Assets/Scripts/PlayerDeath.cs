@@ -27,26 +27,26 @@ public class PlayerDeath : MonoBehaviour
 
         playerInterface.SetActive(false);
 
-        gameObject.GetComponent<PlayerMovement>().enabled = false;
-        gameObject.GetComponent<PlayerRotate>().enabled = false;
-        gameObject.GetComponent<PlayerRotateSmooth>().enabled = false;
-        gameObject.GetComponent<PlayerAim>().enabled = false;
 
-        gameObject.GetComponentInChildren<CameraStep>().enabled = false;
-        gameObject.GetComponentInChildren<ProceduralRecoil>().enabled = false;
-        gameObject.GetComponentInChildren<GunSway>().enabled = false;
 
-        if (gameObject.GetComponentInChildren<PickUpController>() != null)
-        {
-            gameObject.GetComponentInChildren<PickUpController>().enabled = false;
-        }
+        Destroy(GetComponent<PlayerMovement>());
+        Destroy(GetComponent<PlayerRotate>());
+        Destroy(GetComponent<PlayerRotateSmooth>());
+        
+        GetComponent<PlayerAim>().StopAllCoroutines();
+
+        Destroy(GetComponent<PlayerAim>());
+
+        Destroy(GetComponentInChildren<CameraStep>());
+        Destroy(GetComponentInChildren<ProceduralRecoil>());
+        Destroy(GetComponentInChildren<GunSway>());
 
         if (gameObject.GetComponentInChildren<BaseWeapon>() != null)
         {
-            gameObject.GetComponentInChildren<BaseWeapon>().enabled = false;
+            Destroy(GetComponentInChildren<BaseWeapon>());
         }
 
-        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        Destroy(GetComponent<CapsuleCollider>());
 
         float time = 0f;
         float duration = 0.1f;

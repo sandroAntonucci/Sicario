@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class DeathMenu : MonoBehaviour
 {
 
+    public GameObject playerInterface;
+    private GameObject player;
+
     public InputActionAsset PlayerControls;
 
     private InputAction restartAction;
@@ -15,6 +18,8 @@ public class DeathMenu : MonoBehaviour
     {
         restartAction = PlayerControls.FindAction("Restart");
         restartAction.performed += RestartGame;
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnEnable()
@@ -29,7 +34,12 @@ public class DeathMenu : MonoBehaviour
 
     private void RestartGame(InputAction.CallbackContext context)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        Time.timeScale = 1f;
+
+        PickUpController.weaponEquipped = null;
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
+
 
 }
