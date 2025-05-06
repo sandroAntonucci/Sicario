@@ -11,6 +11,7 @@ public class ScoreSystem : MonoBehaviour
 {
     // Singleton
     private static ScoreSystem _instance;
+    private Canvas finalScoreCanvas;
 
     // Vars
     public float baseMultiplier = 1;
