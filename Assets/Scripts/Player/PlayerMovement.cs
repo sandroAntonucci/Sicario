@@ -62,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerRotate _rotateSmooth;
     private PlayerRotate _currentRotate;
 
-    [SerializeField] private GameObject pauseMenu;
 
     private void Awake()
     {

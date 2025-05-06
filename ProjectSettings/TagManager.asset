@@ -14,6 +14,7 @@ TagManager:
   - GameManager
   - SphereTest
   - PlayerInterface
+  - PauseInterface
   layers:
   - Default
   - TransparentFX
