@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerRotate _rotateSmooth;
     private PlayerRotate _currentRotate;
 
+    [SerializeField] private GameObject pauseMenu;
+
     private void Awake()
     {
 
@@ -180,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Start a coroutine to smoothly transition to the slide height
             StartCoroutine(LerpCameraHeight(originalHeight, slideHeight, 0.2f, true));
-            CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(90f, 0.2f));
+            CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(120f, 0.2f));
         }
     }
 
@@ -197,11 +199,11 @@ public class PlayerMovement : MonoBehaviour
             
             if (gameObject.GetComponent<PlayerAim>().isAiming)
             {
-                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(40f, 0.2f));
+                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(60f, 0.2f));
             }
             else
             {
-                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(70f, 0.2f));
+                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(90f, 0.2f));
             }
         }
     }

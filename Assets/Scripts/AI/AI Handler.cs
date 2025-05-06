@@ -15,6 +15,8 @@ public class AIHandler : MonoBehaviour, IDamageable
     public float rangedEnemyDistance = 8;
     public float meleeEnemyDistance = 2;
 
+    public bool isDead = false;
+
     public AIBaseState currentAiState; 
     public AIIdleState idleState = new AIIdleState();
     public AIAwareState awareState = new AIAwareState();

@@ -15,6 +15,8 @@ public class AIDeadState : AIBaseState
         // Adds force to the rigidbody
 
         handler.GetComponent<NavMeshAgent>().enabled = false;
+
+        handler.isDead = true;
         
         
         Rigidbody rb = handler.GetComponent<Rigidbody>();
