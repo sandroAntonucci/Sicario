@@ -4712,7 +4712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652532023144}
-  - component: {fileID: 5866666020845765906}
+  - component: {fileID: 919132148073514451}
   m_Layer: 0
   m_Name: Enemie_Base
   m_TagString: Untagged
@@ -4720,6 +4720,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &919132148073514451
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148073514450}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 536ed37a8a7e2284baadd6a355d78ef6, type: 3}
+  m_Controller: {fileID: 9100000, guid: fb66ca092216d8c499af910abcf56b0a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1081695084186355504
 Transform:
   m_ObjectHideFlags: 0
@@ -5078,7 +5099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5206077888491750831}
   m_Layer: 0
-  m_Name: Body
+  m_Name: Sandro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5521,27 +5542,6 @@ Transform:
   - {fileID: 4920413862331837008}
   m_Father: {fileID: 5053072100769569142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5866666020845765906
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148073514450}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 536ed37a8a7e2284baadd6a355d78ef6, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &6091055112492260501
 Transform:
   m_ObjectHideFlags: 0
