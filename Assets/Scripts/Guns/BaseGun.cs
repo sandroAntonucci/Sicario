@@ -7,6 +7,8 @@ public abstract class BaseGun : BaseWeapon
 {
     public string gunName;
 
+    public GameObject bloodEffectPrefab;
+
     public Vector3 aimPosition;
 
     public float fireRate;
@@ -152,7 +154,16 @@ public abstract class BaseGun : BaseWeapon
     private IEnumerator ShootCooldown()
     {
         canShoot = false;   
-        yield return new WaitForSeconds(fireRate);
+
+        if (!isEnemyWeapon)
+        {
+            yield return new WaitForSeconds(fireRate);
+        }
+        else
+        {
+            yield return new WaitForSeconds(fireRate * 4);
+        }
+
         canShoot = true;
     }
 
@@ -181,4 +192,27 @@ public abstract class BaseGun : BaseWeapon
 
         isEnemyWeapon = false;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if(GetComponent<Rigidbody>().velocity.magnitude > 2f)
+            {
+
+                if (bloodEffectPrefab != null)
+                {
+                    GameObject bloodEffect = Instantiate(bloodEffectPrefab, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal));
+                    Destroy(bloodEffect, 2f); 
+                }
+
+                AIHandler aiHandlerComponent = collision.gameObject.GetComponent<AIHandler>();
+                if (aiHandlerComponent != null)
+                {
+                    aiHandlerComponent.DealDamage(weaponBulletDamage);
+                }
+            }
+        }
+    }
+
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class BaseBullet : MonoBehaviour
 {
+
+    public GameObject bloodEffectPrefab;
+
     // The bullet's movement speed
     public float speed = 5f;
     public float lifeDuration = 2f;
@@ -71,6 +74,13 @@ public class BaseBullet : MonoBehaviour
         {
             if (hit.collider.CompareTag("Enemy"))
             {
+
+                if (bloodEffectPrefab != null)
+                {
+                    GameObject bloodEffect = Instantiate(bloodEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(bloodEffect, 2f);
+                }
+
                 AIHandler aiHandlerComponent = hit.collider.GetComponent<AIHandler>();
                 if (aiHandlerComponent != null)
                 {

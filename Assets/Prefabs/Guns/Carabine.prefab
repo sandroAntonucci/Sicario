@@ -512,13 +512,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff84462b46b8d545be29f8f79bd3efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpRange: 4
+  playerInput: {fileID: 0}
+  interactionText: 
+  canInteract: 0
+  isInteracting: 0
+  interactionRange: 0
   dropForwardForce: 10
   dropUpwardForce: 3
-  PlayerControls: {fileID: -944628639613478452, guid: 4a1a05656139ec942b117e261a77dfc6, type: 3}
-  throwForce: 600
+  throwForce: 1000
   equipped: 0
-  playerCanPick: 0
 --- !u!54 &2255457835861362307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -558,7 +560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a41ade2cd5e947459da8906344556f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpController: {fileID: 0}
   isMelee: 0
+  isEnemyWeapon: 0
   gunName: Pistol
   aimPosition: {x: 0, y: 0, z: 0}
   fireRate: 0.1

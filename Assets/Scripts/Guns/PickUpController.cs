@@ -8,7 +8,7 @@ public class PickUpController : InteractableItem
     [Header("PICK UP VARIABLES")]
     [SerializeField] private float dropForwardForce;
     [SerializeField] private float dropUpwardForce;
-    [SerializeField] private float throwForce = 600f;
+    [SerializeField] private float throwForce = 1000f;
 
     private BaseWeapon weaponScript;
     private Rigidbody rb;
