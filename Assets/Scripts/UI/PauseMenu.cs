@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -47,23 +48,27 @@ public class PauseMenu : MonoBehaviour
 
     private void PauseGame()
     {
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         pauseCanvas.enabled = true;
         Time.timeScale = 0f;
         isPaused = true;
-
         PlayerControls.FindActionMap("Player").FindAction("Shoot").Disable();
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pauseCanvas.enabled = false;
         Time.timeScale = 1f;
         isPaused = false;
-
         PlayerControls.FindActionMap("Player").FindAction("Shoot").Enable();
+    }
 
+    public void ExitToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
