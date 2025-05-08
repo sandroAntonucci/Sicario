@@ -7,6 +7,10 @@ public class PsychedelicTextEffect : MonoBehaviour
     public TMP_Text textMeshPro; // Assign your TextMeshPro component in the Inspector
     public Material textMaterial; // Assign the TextMeshPro material in the Inspector
 
+    public bool useBackground = true; // Use background or not
+    public bool useSideToSide = false; // Use side to side motion or not
+    public bool useOrbit = true; // Use orbit motion or not
+
     public float textureScrollSpeed = 1.0f;
     public float orbitSpeed = 50f; // Speed of the orbit motion
     public float tiltAmount = 15f; // Max tilt amount (left to right)
@@ -23,8 +27,15 @@ public class PsychedelicTextEffect : MonoBehaviour
         if (textMaterial == null) textMaterial = textMeshPro.fontSharedMaterial;
 
         orbitCenter = transform.position; // Assume the center is at the object's current position
-        StartCoroutine(ChangeBackgroundOverTime());
-        StartCoroutine(OrbitAndTiltText());
+
+        if (useBackground)
+            StartCoroutine(ChangeBackgroundOverTime());
+
+        if (useOrbit)
+            StartCoroutine(OrbitAndTiltText());
+
+        if (useSideToSide)
+            StartCoroutine(SideToSide(0.5f, 20f, 0.01f)); // Adjust speed and distance as needed
     }
 
     private IEnumerator ChangeBackgroundOverTime()
@@ -76,5 +87,24 @@ public class PsychedelicTextEffect : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private IEnumerator SideToSide(float duration, float speed, float distance)
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+
+        while (elapsedTime < duration)
+        {
+            // Move side-to-side using sine wave
+            float xOffset = Mathf.Sin(Time.time * speed) * distance;
+            transform.position = transform.position + new Vector3(xOffset, 0f, 0f);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset position after movement
+        transform.position = startPosition;
     }
 }
