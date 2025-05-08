@@ -17,8 +17,10 @@ public class AIDeadState : AIBaseState
         handler.GetComponent<NavMeshAgent>().enabled = false;
 
         handler.isDead = true;
-        
-        
+
+        MonoBehaviour.Instantiate(handler.scorePointsEffect, handler.transform.position, Quaternion.identity);
+            
+
         Rigidbody rb = handler.GetComponent<Rigidbody>();
         if (rb != null)
         {

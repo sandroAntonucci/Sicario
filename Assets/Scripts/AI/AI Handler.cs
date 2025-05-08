@@ -28,6 +28,8 @@ public class AIHandler : MonoBehaviour, IDamageable
     public NodeRegion currentNodeRegion;
     public Node currentNode;
 
+    public GameObject scorePointsEffect;
+
 
     void Start()
     {
@@ -44,8 +46,13 @@ public class AIHandler : MonoBehaviour, IDamageable
 
     public void DealDamage(int amount, string gunName = "")
     {
+
+        if (health > 0)
+            ScoreSystem.Instance.TriggerAwardPointsEvent(amount, gunName);
+
         health -= amount;
-        ScoreSystem.Instance.TriggerAwardPointsEvent(amount, gunName);
+
+        
         if (health <= 0 && currentAiState != deadState)
         {
             ChangeState(deadState);

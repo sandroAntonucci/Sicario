@@ -30,6 +30,8 @@ public class ScoreSystem : MonoBehaviour
     public List<string> comboList = new List<string>();
     private uint scoreToAdd;
 
+    [SerializeField] private ScoreUIHandler scoreUIHandler;
+
     // Coroutines
     public Coroutine multiplierCoroutine;
 
@@ -100,6 +102,12 @@ public class ScoreSystem : MonoBehaviour
         multiplierTime = baseMultiplierTime;
         scoreToAdd = (uint)(amount * multiplier);
         score += scoreToAdd;
+
+        if (scoreUIHandler != null)
+        {
+            StartCoroutine(scoreUIHandler.UpdateScore());
+        }
+
         if (weapon != "")
         {
             if (comboList.Count == 0)
