@@ -3,15 +3,22 @@ using JetBrains.Annotations;
 using TMPro.Examples;
 using UnityEngine;
 
+
 public class BaseBullet : MonoBehaviour
 {
 
     public GameObject bloodEffectPrefab;
 
+    public AudioManager hitSFX;
+
+    public TrailRenderer trailRenderer;
+
     // The bullet's movement speed
     public float speed = 5f;
     public float lifeDuration = 2f;
     public int bulletDamage;
+
+    public BaseGun gun;
 
     public bool canDamage = true;
 
@@ -30,8 +37,10 @@ public class BaseBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        canDamage = true;
 
+        trailRenderer.enabled = true;
+
+        canDamage = true;
 
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.useGravity = false;
@@ -81,10 +90,17 @@ public class BaseBullet : MonoBehaviour
                     Destroy(bloodEffect, 2f);
                 }
 
+                
+
                 AIHandler aiHandlerComponent = hit.collider.GetComponent<AIHandler>();
-                if (aiHandlerComponent != null)
+                if (aiHandlerComponent != null && canDamage)
                 {
+                    if (gun.hitBodySFX != null)
+                    {
+                        gun.hitBodySFX.PlayRandomPitch();
+                    }
                     aiHandlerComponent.DealDamage(bulletDamage);
+                    canDamage = false;
                     ReturnToPool();
                 }
             }
@@ -101,6 +117,13 @@ public class BaseBullet : MonoBehaviour
             if (DestroyCoroutine != null) return;
 
             BulletHoleDecalPool.Instance.SpawnBulletHole(collision.contacts[0].point, collision.contacts[0].normal);
+
+            trailRenderer.enabled = false;
+
+            if (hitSFX != null)
+            {
+                hitSFX.PlayRandomPitch();
+            }
 
             canDamage = false;
 

@@ -521,6 +521,8 @@ MonoBehaviour:
   dropUpwardForce: 3
   throwForce: 1000
   equipped: 0
+  pickUpSFX: {fileID: 0}
+  throwSFX: {fileID: 0}
 --- !u!54 &2255457835861362307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -563,7 +565,10 @@ MonoBehaviour:
   pickUpController: {fileID: 0}
   isMelee: 0
   isEnemyWeapon: 0
+  shootSFX: {fileID: 0}
+  hitBodySFX: {fileID: 0}
   gunName: Pistol
+  bloodEffectPrefab: {fileID: 0}
   aimPosition: {x: 0, y: 0, z: 0}
   fireRate: 0.1
   maxAmmo: 500

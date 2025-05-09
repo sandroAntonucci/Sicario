@@ -10,7 +10,7 @@ public class AIChasingState : AIBaseState
     private bool canAttack = false;
     private bool isRecognizing = false;
 
-    public float recognitionTime = 1.5f;
+    public float recognitionTime = 0.8f;
 
     public override void EnterState(AIHandler handler)
     {

@@ -5,6 +5,10 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public abstract class BaseGun : BaseWeapon
 {
+
+    public AudioManager shootSFX;
+    public AudioManager hitBodySFX;
+
     public string gunName;
 
     public GameObject bloodEffectPrefab;
@@ -17,11 +21,11 @@ public abstract class BaseGun : BaseWeapon
     public int weaponBulletDamage = 100;
 
     public GameObject bulletPrefab;  // Bullet prefab is still needed for pool creation
-    public Transform shootPosition; 
+    public Transform shootPosition;
 
     public float recoilStrength = 5f; // Adjust this value to control how strong the recoil is
     public float recoilRecoverySpeed = 1.0f;
-    private Quaternion startingRotation = Quaternion.Euler(0f,0f,0f);
+    private Quaternion startingRotation = Quaternion.Euler(0f, 0f, 0f);
 
 
     [SerializeField] private GameObject muzzleFlash;
@@ -55,7 +59,7 @@ public abstract class BaseGun : BaseWeapon
 
     private void OnEnable()
     {
-        if (shootAction != null) 
+        if (shootAction != null)
         {
             shootAction.Enable();
         }
@@ -84,7 +88,7 @@ public abstract class BaseGun : BaseWeapon
         if (startingRotation != null && !isEnemyWeapon)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, startingRotation, Time.deltaTime * recoilRecoverySpeed);
-        }  
+        }
     }
 
     public virtual void Shoot()
@@ -96,13 +100,20 @@ public abstract class BaseGun : BaseWeapon
 
         ShootCooldownCoroutine = StartCoroutine(ShootCooldown());
 
-        if(!isEnemyWeapon) currentAmmo--;
+        if (!isEnemyWeapon) currentAmmo--;
 
         StartCoroutine(ShowMuzzleFlash());
 
         // Get a bullet from the pool
         GameObject bullet = BulletPool.Instance.GetBullet(shootPosition.position, shootPosition.rotation);
         BaseBullet bulletComp = bullet.GetComponent<BaseBullet>();
+
+        bulletComp.gun = GetComponent<BaseGun>();
+
+        if (shootSFX != null)
+        {
+            shootSFX.PlayRandomPitch();
+        }
 
         if (isEnemyWeapon) bulletComp.isEnemyBullet = true;
         else bulletComp.isEnemyBullet = false;
@@ -111,7 +122,7 @@ public abstract class BaseGun : BaseWeapon
 
         bullet.SetActive(true);
 
-        if(!isEnemyWeapon) ApplyRecoil();
+        if (!isEnemyWeapon) ApplyRecoil();
     }
 
     private IEnumerator ShowMuzzleFlash()
@@ -121,7 +132,7 @@ public abstract class BaseGun : BaseWeapon
         // Randomize the rotation of the muzzle flash
         muzzleFlash.transform.localEulerAngles = new Vector3(Random.Range(0, 360), 180, 0);
 
-        while(muzzleFlash.transform.localScale.x < 0.01)
+        while (muzzleFlash.transform.localScale.x < 0.01)
         {
             shotLight.intensity += 0.3f;
             muzzleFlash.transform.localScale += new Vector3(0.008f, 0.008f, 0.008f);
@@ -153,7 +164,7 @@ public abstract class BaseGun : BaseWeapon
 
     private IEnumerator ShootCooldown()
     {
-        canShoot = false;   
+        canShoot = false;
 
         if (!isEnemyWeapon)
         {
@@ -169,20 +180,20 @@ public abstract class BaseGun : BaseWeapon
 
     private void ApplyRecoil()
     {
-        recoilStrength = fireRate * recoilStrengthMultiplier; 
+        recoilStrength = fireRate * recoilStrengthMultiplier;
         recoilRecoverySpeed = 2 / fireRate;
         CameraEffects.Instance.recoil.recoil(-recoilStrength);
         float rand = Random.Range(-recoilStrength / 3f, recoilStrength / 3f);
         transform.rotation = transform.rotation * Quaternion.Euler(0f, rand, -recoilStrength);
     }
 
-    private void SetUpEnemyGun() 
+    private void SetUpEnemyGun()
     {
         pickUpController.enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
         GetComponent<BoxCollider>().isTrigger = false;
     }
-    
+
 
     public override void SetUpPlayerWeapon()
     {
@@ -197,13 +208,18 @@ public abstract class BaseGun : BaseWeapon
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(GetComponent<Rigidbody>().velocity.magnitude > 2f)
+            if (GetComponent<Rigidbody>().velocity.magnitude > 2f)
             {
 
                 if (bloodEffectPrefab != null)
                 {
                     GameObject bloodEffect = Instantiate(bloodEffectPrefab, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal));
-                    Destroy(bloodEffect, 2f); 
+                    Destroy(bloodEffect, 2f);
+                }
+
+                if (hitBodySFX != null)
+                {
+                    hitBodySFX.PlayRandomPitch();
                 }
 
                 AIHandler aiHandlerComponent = collision.gameObject.GetComponent<AIHandler>();
@@ -213,6 +229,6 @@ public abstract class BaseGun : BaseWeapon
                 }
             }
         }
-    }
 
+    }
 }

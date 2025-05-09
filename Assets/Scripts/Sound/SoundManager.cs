@@ -2,42 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    private static SoundManager _instance;
 
-    public AudioSource musicAudioSource;
+    [SerializeField] private AudioClip audioClip;
 
-    public static SoundManager Instance
+    private AudioSource audioSource;
+
+    private void Awake()
     {
-        get
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void PlayRandomPitch()
+    {
+        audioSource = UpdateAudioSource();
+
+        if (audioSource != null)
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<SoundManager>();
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject("SoundManager");
-                    _instance = singletonObject.AddComponent<SoundManager>();
-                    _instance.musicAudioSource = singletonObject.AddComponent<AudioSource>();
-                }
-            }
-            return _instance;
+            audioSource.clip = audioClip;
+            float randomPitch = Random.Range(0.95f, 1.05f);
+            audioSource.pitch = randomPitch;
+            audioSource.Play();
+        }
+
+    }
+
+    public void PlaySound()
+    {
+        audioSource = UpdateAudioSource();
+
+        if (audioSource != null)
+        {
+            audioSource.clip = audioClip;
+            audioSource.Play();
         }
     }
 
-    public void Play(GameObject caller, AudioClip clip)
+    private AudioSource UpdateAudioSource()
     {
-        AudioSource audioSource = caller.GetComponent<AudioSource>();
-        if (!audioSource)
-            audioSource = caller.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.Play();
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+
+        foreach (AudioSource source in audioSources)
+        {
+            if (!source.isPlaying)
+            {
+                return source;
+            }
+        }
+
+        AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
+        newAudioSource.playOnAwake = false;
+        newAudioSource.loop = false;
+        newAudioSource.volume = audioSource.volume;
+        newAudioSource.outputAudioMixerGroup = audioSource.outputAudioMixerGroup;
+
+        return newAudioSource;
+
     }
 
-    public void PlayMusic(AudioClip clip)
-    {
-        musicAudioSource.clip = clip;
-        musicAudioSource.Play();
-    }
 }

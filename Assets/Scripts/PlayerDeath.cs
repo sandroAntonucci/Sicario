@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 public class PlayerDeath : MonoBehaviour
 {
 
+    public AudioManager deathSound;
+
     public Volume deathEffect;
     public GameObject playerInterface;
     public GameObject deathInterface;
@@ -22,6 +24,10 @@ public class PlayerDeath : MonoBehaviour
 
     private IEnumerator Death()
     {
+        if (deathSound != null)
+        {
+            deathSound.PlaySound();
+        }
 
         Time.timeScale = 0.5f;
 
@@ -57,6 +63,8 @@ public class PlayerDeath : MonoBehaviour
             deathEffect.weight = Mathf.Lerp(0f, 1f, time / duration);
             yield return null;
         }
+
+
 
         deathInterface.SetActive(true);
 

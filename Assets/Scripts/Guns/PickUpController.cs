@@ -19,6 +19,9 @@ public class PickUpController : InteractableItem
     public static bool slotFull;
     public static PickUpController weaponEquipped;
 
+    public AudioManager pickUpSFX;
+    public AudioManager throwSFX;
+
     private void Start()
     {
         weaponScript = GetComponent<BaseWeapon>();
@@ -34,9 +37,22 @@ public class PickUpController : InteractableItem
 
     }
 
+    public override void ChangeInteractionText()
+    {
+        if (weaponScript == null)
+        {
+            return;
+        }
+
+        if (!weaponScript.isEnemyWeapon)
+        {
+            base.ChangeInteractionText();
+        }
+    }
+
     public override void Interaction()
     {
-        if (!equipped && !isInteracting)
+        if (!equipped && !isInteracting && !weaponScript.isEnemyWeapon)
         {
             PickUp();
             base.Interaction();
@@ -65,6 +81,11 @@ public class PickUpController : InteractableItem
 
         equipped = true;
         slotFull = true;
+
+        if (pickUpSFX != null)
+        {
+            pickUpSFX.PlaySound();
+        }
 
         rb.isKinematic = true;
         rb.interpolation = RigidbodyInterpolation.None;
@@ -109,6 +130,11 @@ public class PickUpController : InteractableItem
         // Continue with the rest of the logic to drop the weapon.
         equipped = false;
         slotFull = false;
+
+        if (throwSFX != null)
+        {
+            throwSFX.PlaySound();
+        }
 
         transform.SetParent(null);
 

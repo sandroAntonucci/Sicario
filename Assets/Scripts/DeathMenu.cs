@@ -2,11 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class DeathMenu : MonoBehaviour
 {
     public GameObject playerInterface;
     private GameObject player;
+
+    public VideoPlayer TVEffect;
+    public GameObject TVTexture;
 
     // Instead of assigning this in the Inspector, we clone it at runtime
     public InputActionAsset PlayerControls;
@@ -68,7 +72,23 @@ public class DeathMenu : MonoBehaviour
             }
         }
 
+        StartCoroutine(RestartGameCoroutine());
+    }
+
+    private IEnumerator RestartGameCoroutine()
+    {
+        TVTexture.SetActive(true);
+        TVEffect.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.05f);
+
+        while (!TVEffect.isPaused)
+        {
+            yield return null;
+        }
+
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 }
