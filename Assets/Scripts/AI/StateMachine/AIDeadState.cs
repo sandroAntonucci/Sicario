@@ -30,6 +30,7 @@ public class AIDeadState : AIBaseState
             rb.useGravity = true;
             rb.AddForce(-Vector3.forward * 15, ForceMode.Force);
             rb.AddTorque(Random.insideUnitSphere * 15, ForceMode.Force);
+            rb.isKinematic = true;
         }
 
         handler.weapon.DropWeapon();

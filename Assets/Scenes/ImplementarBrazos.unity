@@ -174,6 +174,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 0}
   textMaterial: {fileID: 0}
+  useBackground: 1
+  useSideToSide: 0
+  useOrbit: 1
+  useColorChange: 0
+  backgroundColorChange: {r: 0, g: 0, b: 0, a: 0}
   textureScrollSpeed: 0.5
   orbitSpeed: 2
   tiltAmount: 2
@@ -990,6 +995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3744d7bcaa29274bb012c0551e95b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSound: {fileID: 0}
   deathEffect: {fileID: 49708919}
   playerInterface: {fileID: 2076808518}
   deathInterface: {fileID: 1951777171}
@@ -1036,6 +1042,7 @@ MonoBehaviour:
   minimumScoreForA: 0
   scorePerLetter: 0
   comboList: []
+  scoreUIHandler: {fileID: 0}
 --- !u!4 &614803651
 Transform:
   m_ObjectHideFlags: 0
@@ -1354,16 +1361,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 110
   distanceOfView: 15
-  enemyType: 1
+  enemyType: 2
   rangedEnemyDistance: 12
   meleeEnemyDistance: 2
   isDead: 0
   currentNodeRegion: {fileID: 50539162}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!136 &709866100
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2211,6 +2220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 110
@@ -2221,6 +2231,7 @@ MonoBehaviour:
   isDead: 0
   currentNodeRegion: {fileID: 50539162}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!136 &975717471
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2946,6 +2957,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 0}
   textMaterial: {fileID: 0}
+  useBackground: 1
+  useSideToSide: 0
+  useOrbit: 1
+  useColorChange: 0
+  backgroundColorChange: {r: 0, g: 0, b: 0, a: 0}
   textureScrollSpeed: 0.5
   orbitSpeed: 2
   tiltAmount: 2
@@ -3132,6 +3148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 110
@@ -3142,6 +3159,7 @@ MonoBehaviour:
   isDead: 0
   currentNodeRegion: {fileID: 50539162}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!136 &1298799237
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3562,6 +3580,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 0}
   textMaterial: {fileID: 0}
+  useBackground: 1
+  useSideToSide: 0
+  useOrbit: 1
+  useColorChange: 0
+  backgroundColorChange: {r: 0, g: 0, b: 0, a: 0}
   textureScrollSpeed: 0.5
   orbitSpeed: 2
   tiltAmount: 2
@@ -4286,6 +4309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInterface: {fileID: 2076808518}
+  TVEffect: {fileID: 0}
+  TVTexture: {fileID: 0}
   PlayerControls: {fileID: -944628639613478452, guid: 4a1a05656139ec942b117e261a77dfc6, type: 3}
 --- !u!4 &1990178937 stripped
 Transform:
