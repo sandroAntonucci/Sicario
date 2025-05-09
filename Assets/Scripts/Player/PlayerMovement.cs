@@ -179,9 +179,15 @@ public class PlayerMovement : MonoBehaviour
             isSliding = true;
             slideTimer = slideDuration;
 
-            // Start a coroutine to smoothly transition to the slide height
-            StartCoroutine(LerpCameraHeight(originalHeight, slideHeight, 0.2f, true));
-            CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(120f, 0.2f));
+            if (this != null && gameObject != null)
+            {
+                StartCoroutine(LerpCameraHeight(originalHeight, slideHeight, 0.2f, true));
+
+                if (CameraEffects.Instance != null)
+                {
+                    CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(120f, 0.2f));
+                }
+            }
         }
     }
 

@@ -232,7 +232,7 @@ MonoBehaviour:
   textMeshPro: {fileID: 3483967573458759830}
   textMaterial: {fileID: 5501879812719807127, guid: 705c89a466921c64bb2bbf2ab131c948, type: 2}
   useBackground: 1
-  useSideToSide: 1
+  useSideToSide: 0
   useOrbit: 0
   textureScrollSpeed: 0.5
   orbitSpeed: 10

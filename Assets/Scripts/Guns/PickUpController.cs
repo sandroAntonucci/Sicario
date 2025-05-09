@@ -103,7 +103,6 @@ public class PickUpController : InteractableItem
     {
         if (this == null || weaponEquipped == null || weaponEquipped.gameObject == null)
         {
-            Debug.LogWarning("Attempted to drop a destroyed weapon.");
             return;
         }
 
@@ -133,12 +132,19 @@ public class PickUpController : InteractableItem
             rb.AddTorque(Random.onUnitSphere);
         }
 
-        weaponScript.enabled = false;
+
+        if (weaponScript != null)
+            weaponScript.enabled = false;
+
 
         var aim = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAim>();
-        if (aim.isAiming)
+
+        if (aim != null)
         {
-            aim.ResetAim();
+            if (aim.isAiming)
+            {
+                aim.ResetAim();
+            }
         }
 
         weaponEquipped = null;

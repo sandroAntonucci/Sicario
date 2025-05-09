@@ -50,7 +50,12 @@ public class PauseMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        pauseCanvas.enabled = true;
+
+        if (pauseCanvas != null)
+        {
+            pauseCanvas.enabled = true;
+        }
+
         Time.timeScale = 0f;
         isPaused = true;
         PlayerControls.FindActionMap("Player").FindAction("Shoot").Disable();
@@ -60,7 +65,12 @@ public class PauseMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        pauseCanvas.enabled = false;
+
+        if (pauseCanvas != null)
+        {
+            pauseCanvas.enabled = false;
+        }
+
         Time.timeScale = 1f;
         isPaused = false;
         PlayerControls.FindActionMap("Player").FindAction("Shoot").Enable();

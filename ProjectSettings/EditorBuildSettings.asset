@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ImplementarBrazos.unity
-    guid: ee9c6ee378850b04b9727c2e153a3c63
+    path: Assets/Scenes/BloodDecal.unity
+    guid: bb9b7385b2e3f3449ae0f2658c63a5bb
   m_configObjects: {}

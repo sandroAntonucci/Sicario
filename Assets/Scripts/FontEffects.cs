@@ -10,6 +10,9 @@ public class PsychedelicTextEffect : MonoBehaviour
     public bool useBackground = true; // Use background or not
     public bool useSideToSide = false; // Use side to side motion or not
     public bool useOrbit = true; // Use orbit motion or not
+    public bool useColorChange = false; // Use color change or not
+
+    public Color backgroundColorChange;
 
     public float textureScrollSpeed = 1.0f;
     public float orbitSpeed = 50f; // Speed of the orbit motion
@@ -26,7 +29,7 @@ public class PsychedelicTextEffect : MonoBehaviour
         if (textMeshPro == null) textMeshPro = GetComponent<TMP_Text>();
         if (textMaterial == null) textMaterial = textMeshPro.fontSharedMaterial;
 
-        orbitCenter = transform.position; // Assume the center is at the object's current position
+        orbitCenter = transform.position;
 
         if (useBackground)
             StartCoroutine(ChangeBackgroundOverTime());
@@ -35,7 +38,10 @@ public class PsychedelicTextEffect : MonoBehaviour
             StartCoroutine(OrbitAndTiltText());
 
         if (useSideToSide)
-            StartCoroutine(SideToSide(0.5f, 20f, 0.01f)); // Adjust speed and distance as needed
+            StartCoroutine(SideToSide(0.5f, 20f, 0.01f));
+
+        if (useColorChange)
+            StartCoroutine(ChangeBackgroundColor(backgroundColorChange));
     }
 
     private IEnumerator ChangeBackgroundOverTime()
@@ -45,7 +51,7 @@ public class PsychedelicTextEffect : MonoBehaviour
         float minOffset = -0.5f;
         float maxOffset = 0.5f;
 
-        while (true)
+        while (useBackground)
         {
             float elapsedTime = 0f;
 
@@ -67,20 +73,17 @@ public class PsychedelicTextEffect : MonoBehaviour
     {
         float elapsedTime = 0f;
 
-        while (true)
+        while (useOrbit)
         {
-            // Orbit the text in a circular motion
-            angle += orbitSpeed * Time.deltaTime; // Adjust the orbit speed
 
-            // Calculate new position in circular motion
+            angle += orbitSpeed * Time.deltaTime;
+
             float x = Mathf.Cos(angle) * orbitRadius;
             float y = Mathf.Sin(angle) * orbitRadius;
 
-            // Apply the new position to the text
             transform.position = orbitCenter + new Vector3(x, y, 0);
 
-            // Smoothly tilt the text from +tiltAmount to -tiltAmount and back
-            float tiltAngle = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAmount; // Smooth oscillating tilt
+            float tiltAngle = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAmount; 
             transform.rotation = Quaternion.Euler(0, 0, tiltAngle);
 
             elapsedTime += Time.deltaTime;
@@ -96,7 +99,6 @@ public class PsychedelicTextEffect : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            // Move side-to-side using sine wave
             float xOffset = Mathf.Sin(Time.time * speed) * distance;
             transform.position = transform.position + new Vector3(xOffset, 0f, 0f);
 
@@ -104,7 +106,42 @@ public class PsychedelicTextEffect : MonoBehaviour
             yield return null;
         }
 
-        // Reset position after movement
         transform.position = startPosition;
+    }
+
+    private IEnumerator ChangeBackgroundColor(Color color)
+    {
+
+        float duration = 1f;
+
+        Color startColor = textMaterial.GetColor("_FaceColor");
+
+        while (true)
+        {
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                textMaterial.SetColor("_FaceColor", Color.Lerp(startColor, color, elapsedTime / duration));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            textMaterial.SetColor("_FaceColor", color);
+
+            elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                textMaterial.SetColor("_FaceColor", Color.Lerp(color, startColor, elapsedTime / duration));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            textMaterial.SetColor("_FaceColor", startColor);
+
+        }
+
     }
 }

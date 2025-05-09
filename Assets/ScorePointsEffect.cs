@@ -7,6 +7,16 @@ public class ScorePointsEffect : MonoBehaviour
 
     void Start()
     {
+
+        // Set initial rotation to look at the player
+        Vector3 playerPosition = Camera.main.transform.position;
+        Vector3 direction = (playerPosition - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(-direction);
+
+        transform.rotation = lookRotation;
+
+
+
         StartCoroutine(ScoreEffect());
     }
 
