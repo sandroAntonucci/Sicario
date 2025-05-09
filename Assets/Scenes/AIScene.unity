@@ -778,15 +778,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 60
   distanceOfView: 10
-  enemyType: 0
+  enemyType: 2
   rangedEnemyDistance: 8
   meleeEnemyDistance: 2
+  isDead: 0
   currentNodeRegion: {fileID: 967124116}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!195 &234452219
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -997,6 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 60
@@ -1004,8 +1008,10 @@ MonoBehaviour:
   enemyType: 1
   rangedEnemyDistance: 5
   meleeEnemyDistance: 2
+  isDead: 0
   currentNodeRegion: {fileID: 967124116}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!136 &273739792
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2052,7 +2058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eae60df63afe284b99b4ebde926021e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicAudioSource: {fileID: 0}
+  audioClip: {fileID: 0}
 --- !u!4 &702736487
 Transform:
   m_ObjectHideFlags: 0
@@ -4738,6 +4744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 60
@@ -4745,8 +4752,10 @@ MonoBehaviour:
   enemyType: 1
   rangedEnemyDistance: 5
   meleeEnemyDistance: 2
+  isDead: 0
   currentNodeRegion: {fileID: 594849266}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!136 &1969488463
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5178,6 +5187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aac5eb4309d22428dcb454b604b177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   health: 100
   weapon: {fileID: 0}
   fieldOfView: 60
@@ -5185,8 +5195,10 @@ MonoBehaviour:
   enemyType: 1
   rangedEnemyDistance: 5
   meleeEnemyDistance: 2
+  isDead: 0
   currentNodeRegion: {fileID: 967124116}
   currentNode: {fileID: 0}
+  scorePointsEffect: {fileID: 0}
 --- !u!136 &2015939980
 CapsuleCollider:
   m_ObjectHideFlags: 0

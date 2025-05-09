@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class AIHandler : MonoBehaviour, IDamageable
 {
+    public Animator _animator;
     public int health = 100;
     public BaseWeapon weapon;
     public float fieldOfView = 30.0f;
@@ -30,10 +31,24 @@ public class AIHandler : MonoBehaviour, IDamageable
 
     public GameObject scorePointsEffect;
 
-
     void Start()
     {
+        _animator = transform.GetChild(0).GetComponent<Animator>();
         weapon = GetComponentInChildren<BaseWeapon>();
+
+        // change that sweet sweet animator branch
+        switch (enemyType)
+        {
+            case EnemyType.Melee:
+                // nothing?
+                break;
+            case EnemyType.Pistol:
+                _animator.SetBool("isPistol", true);
+                break;
+            case EnemyType.Rifle:
+                _animator.SetBool("isRifle", true);
+                break;
+        }
 
         currentAiState = idleState;
         currentAiState.EnterState(this);
@@ -125,7 +140,7 @@ public class AIHandler : MonoBehaviour, IDamageable
         float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
         if (enemyType == EnemyType.Melee && distanceToPlayer < meleeEnemyDistance)
             return true;
-        else if (enemyType == EnemyType.Ranged && distanceToPlayer < rangedEnemyDistance)
+        else if ((enemyType == EnemyType.Rifle || enemyType == EnemyType.Pistol) && distanceToPlayer < rangedEnemyDistance)
             return true;
         
         return false;

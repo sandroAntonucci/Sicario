@@ -43,6 +43,7 @@ public class AIIdleState : AIBaseState
                 NavMeshAgent aiAgent = handler.GetComponent<NavMeshAgent>();
                 if (aiAgent != null && aiAgent.remainingDistance == 0 && !aiAgent.pathPending)
                 {
+                    handler._animator.SetBool("isWalking", true);
                     aiAgent.destination = nextNode.transform.position;
                     nextNode.isOccupied = true;
                     handler.currentNode = nextNode;
@@ -111,6 +112,7 @@ public class AIIdleState : AIBaseState
 
         // Rotate the AI to face its destination
         handler.transform.rotation = handler.currentNode.transform.rotation;
+        handler._animator.SetBool("isWalking", false);
 
         yield return new WaitForSeconds(Random.Range(switchNodeWaitTime, switchNodeWaitTime * 2));
 

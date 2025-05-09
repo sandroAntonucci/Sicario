@@ -10,7 +10,7 @@ public class AIAttackingState : AIBaseState
 
     public override void EnterState(AIHandler handler)
     {
-
+        handler._animator.SetBool("isShooting", true);
         handler.GetComponent<NavMeshAgent>().isStopped = true;
 
         gun = handler.GetComponentInChildren<BaseGun>();
@@ -45,6 +45,7 @@ public class AIAttackingState : AIBaseState
 
     public override void ExitState(AIHandler handler)
     {
+        handler._animator.SetBool("isShooting", false);
         handler.GetComponent<NavMeshAgent>().isStopped = false;
         gun.StopShooting();
     }

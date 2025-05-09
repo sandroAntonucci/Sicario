@@ -14,11 +14,12 @@ public class AIChasingState : AIBaseState
 
     public override void EnterState(AIHandler handler)
     {
+        handler._animator.SetBool("isWalking", true);
         agent = handler.GetComponent<NavMeshAgent>();
 
         if (handler.enemyType == EnemyType.Melee)
             agent.stoppingDistance = handler.meleeEnemyDistance;
-        else if (handler.enemyType == EnemyType.Ranged)
+        else if (handler.enemyType == EnemyType.Pistol || handler.enemyType == EnemyType.Rifle)
             agent.stoppingDistance = handler.rangedEnemyDistance;
 
         if (!firstTimeDetected)
@@ -80,6 +81,7 @@ public class AIChasingState : AIBaseState
 
     public override void ExitState(AIHandler handler)
     {
+        handler._animator.SetBool("isWalking", false);
         canAttack = false;
         isRecognizing = false;
         if (agent != null)
