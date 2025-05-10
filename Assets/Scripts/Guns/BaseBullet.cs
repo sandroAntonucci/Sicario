@@ -37,7 +37,6 @@ public class BaseBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-
         trailRenderer.enabled = true;
 
         canDamage = true;
@@ -47,7 +46,6 @@ public class BaseBullet : MonoBehaviour
 
         // Draws raycast from the camera to know where the bullet is going
         Transform cameraHolder = GameObject.FindGameObjectWithTag("MainCamera").transform;
-
 
         Ray ray = new Ray(cameraHolder.position + cameraHolder.forward * 0.1f, cameraHolder.forward);
         RaycastHit hit;
@@ -91,8 +89,17 @@ public class BaseBullet : MonoBehaviour
                 }
 
                 
-
+                GameObject enemyObject = hit.collider.gameObject;
                 AIHandler aiHandlerComponent = hit.collider.GetComponent<AIHandler>();
+
+                // Gets aiHandler component from the parent object if the bullet hits a child object
+                while (aiHandlerComponent == null)
+                {
+                    enemyObject = enemyObject.transform.parent.gameObject;
+                    aiHandlerComponent = enemyObject.GetComponent<AIHandler>();
+                    if (enemyObject == null) break;
+                }
+
                 if (aiHandlerComponent != null && canDamage)
                 {
                     if (gun.hitBodySFX != null)
@@ -112,7 +119,7 @@ public class BaseBullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
-        if (!collision.gameObject.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
         {
             if (DestroyCoroutine != null) return;
 
