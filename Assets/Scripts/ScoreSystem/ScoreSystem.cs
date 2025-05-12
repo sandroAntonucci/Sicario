@@ -6,12 +6,14 @@ using System.Net;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
     // Singleton
     private static ScoreSystem _instance;
     private Canvas finalScoreCanvas;
+
 
     // Vars
     public float baseMultiplier = 1;
@@ -31,6 +33,7 @@ public class ScoreSystem : MonoBehaviour
     private uint scoreToAdd;
 
     [SerializeField] private ScoreUIHandler scoreUIHandler;
+    [SerializeField] private UnityEngine.UI.Slider multiplierSlider;
 
     // Coroutines
     public Coroutine multiplierCoroutine;
@@ -62,6 +65,19 @@ public class ScoreSystem : MonoBehaviour
     private void Awake()
     {
         InitScoreSystem();
+        multiplierSlider = GameObject.FindGameObjectWithTag("Slider").GetComponent<UnityEngine.UI.Slider>();
+    }
+
+    private void Update()
+    {
+        if (multiplierTime > 0)
+        {
+            multiplierSlider.value = multiplierTime / baseMultiplierTime;
+        }
+        else
+        {
+            multiplierSlider.value = 0;
+        }
     }
 
     private void InitScoreSystem()
@@ -128,6 +144,9 @@ public class ScoreSystem : MonoBehaviour
 
     private IEnumerator MultiplierCoroutine()
     {
+
+
+
         while (multiplierTime > 0)
         {
             yield return new WaitForSeconds(multiplierDecrease);
