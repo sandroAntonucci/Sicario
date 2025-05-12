@@ -37,6 +37,8 @@ public class BaseBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        GetComponent<Collider>().enabled = true;
+
         trailRenderer.enabled = true;
 
         canDamage = true;
@@ -72,16 +74,19 @@ public class BaseBullet : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         float moveDistance = speed * Time.deltaTime;
         RaycastHit hit;
+        float detectionDistance = moveDistance + 0.5f; // or some small buffer
 
-        if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, moveDistance * 1000) && !isEnemyBullet)
-        {
-            if (hit.collider.CompareTag("Enemy"))
+        if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, detectionDistance) && !isEnemyBullet) 
+        { 
+            if (hit.collider.CompareTag("Enemy") && canDamage)
             {
 
+
+                GetComponent<Collider>().enabled = false;
                 if (bloodEffectPrefab != null)
                 {
                     GameObject bloodEffect = Instantiate(bloodEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
@@ -92,15 +97,7 @@ public class BaseBullet : MonoBehaviour
                 GameObject enemyObject = hit.collider.gameObject;
                 AIHandler aiHandlerComponent = hit.collider.GetComponent<AIHandler>();
 
-                // Gets aiHandler component from the parent object if the bullet hits a child object
-                while (aiHandlerComponent == null)
-                {
-                    enemyObject = enemyObject.transform.parent.gameObject;
-                    aiHandlerComponent = enemyObject.GetComponent<AIHandler>();
-                    if (enemyObject == null) break;
-                }
-
-                if (aiHandlerComponent != null && canDamage)
+                if (aiHandlerComponent != null)
                 {
                     if (gun.hitBodySFX != null)
                     {

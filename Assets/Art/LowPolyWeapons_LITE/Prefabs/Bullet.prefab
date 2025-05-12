@@ -219,7 +219,7 @@ MonoBehaviour:
   bloodEffectPrefab: {fileID: 3114573475498384382, guid: cae7b5963499e1c4ab9d735b5b25b621, type: 3}
   hitSFX: {fileID: 0}
   trailRenderer: {fileID: 3912205153802121913}
-  speed: 200
+  speed: 100
   lifeDuration: 2
   bulletDamage: 0
   gun: {fileID: 0}
