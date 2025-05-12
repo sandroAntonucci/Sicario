@@ -61,7 +61,7 @@ public class AIHandler : MonoBehaviour, IDamageable
         currentAiState.UpdateState(this);
     }
 
-    public void DealDamage(int amount, string gunName = "")
+    public void DealDamage(int amount, string gunName = "", bool silent = false)
     {
 
         if (health > 0)
@@ -70,6 +70,10 @@ public class AIHandler : MonoBehaviour, IDamageable
 
         health -= amount;
 
+        if (!silent && currentAiState == idleState)
+        {
+            ChangeState(awareState);
+        }
         
         if (health <= 0 && currentAiState != deadState)
         {

@@ -225,7 +225,7 @@ public abstract class BaseGun : BaseWeapon
                 AIHandler aiHandlerComponent = collision.gameObject.GetComponent<AIHandler>();
                 if (aiHandlerComponent != null)
                 {
-                    aiHandlerComponent.DealDamage(weaponBulletDamage);
+                    aiHandlerComponent.DealDamage(weaponBulletDamage, gunName, true);
                 }
             }
         }

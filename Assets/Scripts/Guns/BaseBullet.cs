@@ -128,7 +128,7 @@ public class BaseBullet : MonoBehaviour
                         damageApplied = Mathf.RoundToInt(bulletDamage * 0.5f);
                     }   
 
-                    aiHandlerComponent.DealDamage(damageApplied);
+                    aiHandlerComponent.DealDamage(damageApplied, gun.gunName);
                     canDamage = false;
                     ReturnToPool();
                 }
