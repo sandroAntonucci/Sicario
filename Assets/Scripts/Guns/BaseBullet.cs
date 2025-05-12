@@ -109,7 +109,26 @@ public class BaseBullet : MonoBehaviour
                     {
                         gun.hitBodySFX.PlayRandomPitch();
                     }
-                    aiHandlerComponent.DealDamage(bulletDamage);
+
+                    int damageApplied = bulletDamage;
+
+                    int layerIndex = hit.collider.gameObject.layer;
+                    string layerName = LayerMask.LayerToName(layerIndex);
+
+                    if (layerName == "Head")
+                    {
+                        damageApplied = Mathf.RoundToInt(bulletDamage * 2.5f);
+                    }
+                    else if (layerName == "Body")
+                    {
+                        damageApplied = Mathf.RoundToInt(bulletDamage * 1.5f);
+                    }
+                    else if (layerName == "Legs")
+                    {
+                        damageApplied = Mathf.RoundToInt(bulletDamage * 0.5f);
+                    }   
+
+                    aiHandlerComponent.DealDamage(damageApplied);
                     canDamage = false;
                     ReturnToPool();
                 }

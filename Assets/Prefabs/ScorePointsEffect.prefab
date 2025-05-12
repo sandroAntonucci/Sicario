@@ -172,8 +172,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7
-  m_fontSizeBase: 7
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -234,6 +234,8 @@ MonoBehaviour:
   useBackground: 1
   useSideToSide: 0
   useOrbit: 0
+  useColorChange: 0
+  backgroundColorChange: {r: 0, g: 0, b: 0, a: 0}
   textureScrollSpeed: 0.5
   orbitSpeed: 10
   tiltAmount: 2

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 
 public class AIDeadState : AIBaseState
@@ -19,8 +20,10 @@ public class AIDeadState : AIBaseState
 
         handler.isDead = true;
 
-        MonoBehaviour.Instantiate(handler.scorePointsEffect, handler.transform.position, Quaternion.identity);
-            
+        GameObject scoreEffect = MonoBehaviour.Instantiate(handler.scorePointsEffect, handler.transform.position, Quaternion.identity);
+
+        scoreEffect.GetComponentInChildren<TextMeshPro>().text = handler.damageReceived.ToString();
+
 
         Rigidbody rb = handler.GetComponent<Rigidbody>();
 

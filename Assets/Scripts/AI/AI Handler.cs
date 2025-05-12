@@ -18,6 +18,8 @@ public class AIHandler : MonoBehaviour, IDamageable
 
     public bool isDead = false;
 
+    public int damageReceived = 0;
+
     public AIBaseState currentAiState; 
     public AIIdleState idleState = new AIIdleState();
     public AIAwareState awareState = new AIAwareState();
@@ -64,6 +66,7 @@ public class AIHandler : MonoBehaviour, IDamageable
 
         if (health > 0)
             ScoreSystem.Instance.TriggerAwardPointsEvent(amount, gunName);
+            damageReceived = amount;
 
         health -= amount;
 
