@@ -8653,7 +8653,7 @@ MonoBehaviour:
   _rotationLimit: 90
   _speed: 100
   _playerControls: {fileID: -944628639613478452, guid: 4a1a05656139ec942b117e261a77dfc6, type: 3}
-  _smoothTime: 0.02
+  _smoothTime: 0.001
   _horiRotHelper: {fileID: 1476785105}
 --- !u!114 &530991636
 MonoBehaviour:
@@ -29126,8 +29126,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38
-  m_fontSizeBase: 38
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0

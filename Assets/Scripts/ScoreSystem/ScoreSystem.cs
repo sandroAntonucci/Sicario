@@ -71,7 +71,10 @@ public class ScoreSystem : MonoBehaviour
         gunsInLevel = GameObject.FindGameObjectsWithTag("Gun");
         foreach (GameObject enemy in enemiesInLevel)
         {
-            totalEnemyHealth += enemy.GetComponent<AIHandler>().health;
+            if (enemy.GetComponent<AIHandler>() != null)
+            {
+                totalEnemyHealth += enemy.GetComponent<AIHandler>().health;
+            }
         }
         foreach (GameObject GUN in gunsInLevel)
         {
