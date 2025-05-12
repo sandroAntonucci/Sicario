@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/BloodDecal.unity
-    guid: bb9b7385b2e3f3449ae0f2658c63a5bb
+    path: Assets/Scenes/ExtraEffects.unity
+    guid: ecca0d0738ce42c4e826fd76fbb1af62
   m_configObjects: {}

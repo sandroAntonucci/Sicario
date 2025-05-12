@@ -9,6 +9,7 @@ public class AmmoHandler : MonoBehaviour
     private GameObject player;
 
     [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private TextMeshProUGUI ammoText2;
 
     void Start()
     {
@@ -22,10 +23,12 @@ public class AmmoHandler : MonoBehaviour
         if (player.GetComponentInChildren<BaseGun>() != null)
         {
             ammoText.text = player.GetComponentInChildren<BaseGun>().currentAmmo.ToString() + "/" + player.GetComponentInChildren<BaseGun>().maxAmmo.ToString();
+            ammoText2.text = player.GetComponentInChildren<BaseGun>().currentAmmo.ToString() + "/" + player.GetComponentInChildren<BaseGun>().maxAmmo.ToString();
         }
         else
         {
             ammoText.text = "";
+            ammoText2.text = "";
         }
     }
 

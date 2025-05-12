@@ -11,6 +11,8 @@ public class PsychedelicTextEffect : MonoBehaviour
     public bool useSideToSide = false; // Use side to side motion or not
     public bool useOrbit = true; // Use orbit motion or not
     public bool useColorChange = false; // Use color change or not
+    public bool useScale = false;
+    public bool useScaleForthAndBack = false; // Use scale forth and back or not
 
     public Color backgroundColorChange;
 
@@ -20,7 +22,8 @@ public class PsychedelicTextEffect : MonoBehaviour
     public float orbitRadius = 1f; // Distance from the center of rotation
     public float switchTime = 2.0f; // Time to change rotation direction
     public float tiltSpeed = 0.5f; // Speed of the tilting effect
-
+    public float finalScale = 1.5f; // Final scale of the text
+    public float scaleDuration = 1.0f; // Duration of the scaling effect
     private Vector3 orbitCenter;
     private float angle = 0f;
 
@@ -42,6 +45,12 @@ public class PsychedelicTextEffect : MonoBehaviour
 
         if (useColorChange)
             StartCoroutine(ChangeBackgroundColor(backgroundColorChange));
+
+        if (useScale)
+            StartCoroutine(ScaleText());
+
+        if (useScaleForthAndBack)
+            StartCoroutine(ScaleForthAndBack());
     }
 
     private IEnumerator ChangeBackgroundOverTime()
@@ -144,4 +153,61 @@ public class PsychedelicTextEffect : MonoBehaviour
         }
 
     }
+
+    private IEnumerator ScaleText()
+    {
+
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * finalScale;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < scaleDuration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / scaleDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+
+
+    }
+
+    private IEnumerator ScaleForthAndBack()
+    {
+
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * finalScale;
+
+
+        while (useScaleForthAndBack)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < scaleDuration)
+            {
+                transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / scaleDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localScale = targetScale;
+
+            elapsedTime = 0f;
+
+            while (elapsedTime < scaleDuration)
+            {
+                transform.localScale = Vector3.Lerp(targetScale, originalScale, elapsedTime / scaleDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localScale = originalScale;
+
+        }
+
+
+    }
+
 }
