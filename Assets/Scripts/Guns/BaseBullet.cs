@@ -97,6 +97,12 @@ public class BaseBullet : MonoBehaviour
                 GameObject enemyObject = hit.collider.gameObject;
                 AIHandler aiHandlerComponent = hit.collider.GetComponent<AIHandler>();
 
+                while (enemyObject != null && aiHandlerComponent == null)
+                {
+                    enemyObject = enemyObject.transform.parent.gameObject;
+                    aiHandlerComponent = enemyObject.GetComponent<AIHandler>();
+                }
+
                 if (aiHandlerComponent != null)
                 {
                     if (gun.hitBodySFX != null)
