@@ -70,6 +70,8 @@ public class BaseBullet : MonoBehaviour
             {
                 rb.velocity = transform.right * -1 * speed;
             }
+
+            trailRenderer.enabled = false;
         }
 
     }
@@ -126,8 +128,9 @@ public class BaseBullet : MonoBehaviour
                     else if (layerName == "Legs")
                     {
                         damageApplied = Mathf.RoundToInt(bulletDamage * 0.5f);
-                    }   
+                    }
 
+                    GameObject.FindGameObjectWithTag("Hitmarker").GetComponent<Hitmarker>().StartCoroutine("ShowHitmarker");
                     aiHandlerComponent.DealDamage(damageApplied, gun.gunName);
                     canDamage = false;
                     ReturnToPool();

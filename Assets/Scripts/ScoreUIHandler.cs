@@ -7,7 +7,7 @@ public class ScoreUIHandler : MonoBehaviour
 {
 
     public TextMeshProUGUI scoreText;
-
+    public TextMeshProUGUI scoreText2;
     public IEnumerator UpdateScore()
     {
 
@@ -24,6 +24,7 @@ public class ScoreUIHandler : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / duration);
             scoreText.text = Mathf.RoundToInt(Mathf.Lerp(score, targetScore, t)).ToString();
+            scoreText2.text = Mathf.RoundToInt(Mathf.Lerp(score, targetScore, t)).ToString();
             yield return null;
         }
 

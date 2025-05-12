@@ -15,6 +15,7 @@ TagManager:
   - SphereTest
   - PlayerInterface
   - PauseInterface
+  - Hitmarker
   layers:
   - Default
   - TransparentFX
