@@ -85,7 +85,15 @@ public class PlayerAim : MonoBehaviour
         Vector3 targetPosition = PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().aimPosition;
 
         PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().recoilStrengthMultiplier /= 2;
-        gameObject.GetComponent<PlayerRotate>()._speed /= 2;
+
+        if (gameObject.GetComponent<PlayerRotateSmooth>() != null)
+        {
+            gameObject.GetComponent<PlayerRotateSmooth>()._speed /= 4;
+        }
+        else
+        {
+            gameObject.GetComponent<PlayerRotate>()._speed /= 4;
+        }
 
         // Instantly set rotation
         itemHolder.transform.localRotation = Quaternion.Euler(0, 90, 0);
@@ -106,8 +114,15 @@ public class PlayerAim : MonoBehaviour
         marker.SetActive(true);
         Vector3 targetPosition = new Vector3(0.25f, -0.2f, 0.4f);
         CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV, 0.1f));
-        gameObject.GetComponent<PlayerRotate>()._speed *= 2;
 
+        if (gameObject.GetComponent<PlayerRotateSmooth>() != null)
+        {
+            gameObject.GetComponent<PlayerRotateSmooth>()._speed *= 4;
+        }
+        else
+        {
+            gameObject.GetComponent<PlayerRotate>()._speed *= 4;
+        }
 
         PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().recoilStrengthMultiplier *= 2;
 
@@ -134,7 +149,15 @@ public class PlayerAim : MonoBehaviour
             StopCoroutine(CameraEffects.Instance.ChangeFOVCoroutine);
         }
 
-        gameObject.GetComponent<PlayerRotate>()._speed *= 2;
+        if (gameObject.GetComponent<PlayerRotateSmooth>() != null)
+        {
+            gameObject.GetComponent<PlayerRotateSmooth>()._speed *= 4;
+        }
+        else
+        {
+            gameObject.GetComponent<PlayerRotate>()._speed *= 4;
+        }
+
         PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().recoilStrengthMultiplier *= 2;
 
         isAiming = false;

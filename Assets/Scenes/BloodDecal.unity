@@ -4301,6 +4301,7 @@ MonoBehaviour:
   rangedEnemyDistance: 12
   meleeEnemyDistance: 2
   isDead: 0
+  damageReceived: 0
   currentNodeRegion: {fileID: 50539162}
   currentNode: {fileID: 0}
   scorePointsEffect: {fileID: 3975037875812491636, guid: 7ca7754ff95cc61468ae288f2835eb4c, type: 3}
@@ -12532,6 +12533,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 106213318282015425, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 106213318282015425, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 106213318282015425, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 565752941878552624, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
       propertyPath: m_TagString
       value: InteractionText
@@ -12663,6 +12676,26 @@ PrefabInstance:
     - target: {fileID: 2245371078414881356, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641043352178537952, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: adbd71afd97f6b040882874eab049d48, type: 3}
+    - target: {fileID: 4641043352178537952, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641043352178537952, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_Color.b
+      value: 0.30731943
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641043352178537952, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_Color.g
+      value: 0.29102886
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641043352178537952, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5660378
       objectReference: {fileID: 0}
     - target: {fileID: 5863154991004004860, guid: c0d7f3f28c9d0db4984bcd4ad45caf56, type: 3}
       propertyPath: m_RenderMode
@@ -12821,7 +12854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1434995050503614468, guid: ed118b4e90f0b04469cf566dc07667f9, type: 3}
       propertyPath: fireRate
-      value: 0.15
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 1434995050503614468, guid: ed118b4e90f0b04469cf566dc07667f9, type: 3}
       propertyPath: shootSFX
