@@ -23,13 +23,11 @@ public class AIDeadState : AIBaseState
             
 
         Rigidbody rb = handler.GetComponent<Rigidbody>();
+
         if (rb != null)
         {
-            rb.velocity = Vector3.zero; 
             rb.constraints = RigidbodyConstraints.None;
             rb.useGravity = true;
-            rb.AddForce(-Vector3.forward * 15, ForceMode.Force);
-            rb.AddTorque(Random.insideUnitSphere * 15, ForceMode.Force);
             rb.isKinematic = true;
         }
 

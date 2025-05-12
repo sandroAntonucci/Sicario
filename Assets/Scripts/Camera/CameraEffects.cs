@@ -13,6 +13,8 @@ public class CameraEffects : MonoBehaviour
 
     public Coroutine ChangeFOVCoroutine;
 
+    public float defaultFOV = 90f;
+
     private void Awake()
     {
         if (Instance == null)
@@ -28,6 +30,8 @@ public class CameraEffects : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        defaultFOV = OptionsMenu.fov;
+        mainCamera.fieldOfView = defaultFOV;
     }
 
     public IEnumerator ChangeFOV(float targetFOV, float duration)

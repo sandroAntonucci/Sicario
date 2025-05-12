@@ -13,6 +13,8 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private InputActionAsset PlayerControls;
 
+    [SerializeField] private GameObject optionsMenu;
+
     private InputAction pauseAction;
 
     private void Awake()
@@ -74,6 +76,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         PlayerControls.FindActionMap("Player").FindAction("Shoot").Enable();
+    }
+
+    public void ShowOptions()
+    {
+        optionsMenu.SetActive(true);
     }
 
     public void ExitToMainMenu()

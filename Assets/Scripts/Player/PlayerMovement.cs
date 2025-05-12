@@ -185,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (CameraEffects.Instance != null)
                 {
-                    CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(120f, 0.2f));
+                    CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV * 1.2f, 0.2f));
                 }
             }
         }
@@ -204,11 +204,11 @@ public class PlayerMovement : MonoBehaviour
             
             if (gameObject.GetComponent<PlayerAim>().isAiming)
             {
-                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(60f, 0.2f));
+                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV * 0.6f, 0.2f));
             }
             else
             {
-                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(90f, 0.2f));
+                CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV, 0.2f));
             }
         }
     }

@@ -23,6 +23,9 @@ public class BaseWeapon : MonoBehaviour
 
     public void DropWeapon()
     {
+
+        transform.SetParent(null);
+
         Rigidbody rb = GetComponent<Rigidbody>();
 
         rb.isKinematic = false;
@@ -33,6 +36,7 @@ public class BaseWeapon : MonoBehaviour
         rb.AddTorque(rb.transform.forward, ForceMode.Impulse);
 
         pickUpController.enabled = true;
+
     }
 
     public virtual void SetUpPlayerWeapon()

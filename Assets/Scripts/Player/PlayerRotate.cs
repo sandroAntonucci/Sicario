@@ -9,7 +9,7 @@ public class PlayerRotate : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private Transform _cameraHolder;
     [SerializeField] private float _rotationLimit;
-    public float _speed;
+    public float _speed = 100;
 
     [SerializeField] private InputActionAsset _playerControls;
 
@@ -24,6 +24,8 @@ public class PlayerRotate : MonoBehaviour
 
         lookAction.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         lookAction.canceled += ctx => lookInput = Vector2.zero;
+
+        _speed = OptionsMenu.sensitivity;
     }
 
     private void OnEnable()

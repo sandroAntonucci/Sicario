@@ -80,7 +80,7 @@ public class PlayerAim : MonoBehaviour
     {
 
         marker.SetActive(false);
-        CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(60, 0.2f));
+        CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV * 0.6f, 0.2f));
         gunSway.enabled = false;
         Vector3 targetPosition = PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().aimPosition;
 
@@ -105,7 +105,7 @@ public class PlayerAim : MonoBehaviour
     {
         marker.SetActive(true);
         Vector3 targetPosition = new Vector3(0.25f, -0.2f, 0.4f);
-        CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(90, 0.1f));
+        CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV, 0.1f));
         gameObject.GetComponent<PlayerRotate>()._speed *= 2;
 
 
@@ -138,7 +138,7 @@ public class PlayerAim : MonoBehaviour
         PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().recoilStrengthMultiplier *= 2;
 
         isAiming = false;
-        StartCoroutine(CameraEffects.Instance.ChangeFOV(70, 0.1f));
+        CameraEffects.Instance.ChangeFOVCoroutine = StartCoroutine(CameraEffects.Instance.ChangeFOV(CameraEffects.Instance.defaultFOV, 0.1f));
         marker.SetActive(true);
         itemHolder.transform.localPosition = new Vector3(0.25f, -0.2f, 0.4f);
         gunSway.enabled = true;
