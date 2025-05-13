@@ -57,7 +57,8 @@ public class AIIdleState : AIBaseState
 
     public override void ExitState(AIHandler handler)
     {
-        handler.StopCoroutine(DelayNextNodeCoroutine);
+        if (DelayNextNodeCoroutine != null)
+            handler.StopCoroutine(DelayNextNodeCoroutine);
     }
 
     public NodeRegion GetRandomNodeRegion(AIHandler handler)
