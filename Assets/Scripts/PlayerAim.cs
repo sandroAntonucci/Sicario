@@ -88,11 +88,11 @@ public class PlayerAim : MonoBehaviour
 
         if (gameObject.GetComponent<PlayerRotateSmooth>() != null)
         {
-            gameObject.GetComponent<PlayerRotateSmooth>()._speed /= 4;
+            gameObject.GetComponent<PlayerRotateSmooth>()._speed /= 3;
         }
         else
         {
-            gameObject.GetComponent<PlayerRotate>()._speed /= 4;
+            gameObject.GetComponent<PlayerRotate>()._speed /= 3;
         }
 
         // Instantly set rotation
@@ -117,11 +117,11 @@ public class PlayerAim : MonoBehaviour
 
         if (gameObject.GetComponent<PlayerRotateSmooth>() != null)
         {
-            gameObject.GetComponent<PlayerRotateSmooth>()._speed *= 4;
+            gameObject.GetComponent<PlayerRotateSmooth>()._speed *= 3;
         }
         else
         {
-            gameObject.GetComponent<PlayerRotate>()._speed *= 4;
+            gameObject.GetComponent<PlayerRotate>()._speed *= 3;
         }
 
         PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().recoilStrengthMultiplier *= 2;
@@ -151,11 +151,11 @@ public class PlayerAim : MonoBehaviour
 
         if (gameObject.GetComponent<PlayerRotateSmooth>() != null)
         {
-            gameObject.GetComponent<PlayerRotateSmooth>()._speed *= 4;
+            gameObject.GetComponent<PlayerRotateSmooth>()._speed *= 3;
         }
         else
         {
-            gameObject.GetComponent<PlayerRotate>()._speed *= 4;
+            gameObject.GetComponent<PlayerRotate>()._speed *= 3;
         }
 
         PickUpController.weaponEquipped.gameObject.GetComponent<BaseGun>().recoilStrengthMultiplier *= 2;

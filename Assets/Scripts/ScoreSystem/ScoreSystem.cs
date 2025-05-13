@@ -18,7 +18,7 @@ public class ScoreSystem : MonoBehaviour
     // Vars
     public float baseMultiplier = 1;
     public float multiplier;
-    public float baseMultiplierTime = 3;
+    public float baseMultiplierTime = 8;
     public float multiplierTime;
     public float multiplierDecrease = .1f;
     public uint score; // unsigned int can hold a bigger integer number =)
@@ -33,7 +33,8 @@ public class ScoreSystem : MonoBehaviour
     private uint scoreToAdd;
 
     [SerializeField] private ScoreUIHandler scoreUIHandler;
-    [SerializeField] private UnityEngine.UI.Slider multiplierSlider;
+    [SerializeField] private MultiplierEffect multiplierEffect;
+    [SerializeField] private PostProcessingSwap postProcessingEffects;
 
     // Coroutines
     public Coroutine multiplierCoroutine;
@@ -65,19 +66,6 @@ public class ScoreSystem : MonoBehaviour
     private void Awake()
     {
         InitScoreSystem();
-        multiplierSlider = GameObject.FindGameObjectWithTag("Slider").GetComponent<UnityEngine.UI.Slider>();
-    }
-
-    private void Update()
-    {
-        if (multiplierTime > 0)
-        {
-            multiplierSlider.value = multiplierTime / baseMultiplierTime;
-        }
-        else
-        {
-            multiplierSlider.value = 0;
-        }
     }
 
     private void InitScoreSystem()
@@ -145,6 +133,14 @@ public class ScoreSystem : MonoBehaviour
     private IEnumerator MultiplierCoroutine()
     {
 
+        multiplierEffect.ChangeMultiplier(multiplier);
+
+        if (postProcessingEffects.postProcessingCoroutine != null)
+        {
+            StopCoroutine(postProcessingEffects.postProcessingCoroutine);
+        }
+
+        postProcessingEffects.postProcessingCoroutine = StartCoroutine(postProcessingEffects.ActivateRush());
 
 
         while (multiplierTime > 0)
@@ -154,6 +150,14 @@ public class ScoreSystem : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         multiplier = baseMultiplier;
+
+        if (postProcessingEffects.postProcessingCoroutine != null)
+        {
+            StopCoroutine(postProcessingEffects.postProcessingCoroutine);
+        }
+
+        postProcessingEffects.postProcessingCoroutine = StartCoroutine(postProcessingEffects.DeactivateRush());
+
         multiplierTime = 0;
         comboList.Clear();
     }

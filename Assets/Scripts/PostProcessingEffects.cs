@@ -6,43 +6,35 @@ using UnityEngine.Rendering.Universal;
 public class PostProcessingEffects : MonoBehaviour
 {
     public Volume volume;
+    public Color color1 = Color.red;
+    public Color color2 = Color.blue;
     private Vignette vignette;
-    public float hueSpeed = 10f; // Speed of hue change (degrees per second)
+    public float colorChangeSpeed = 1f; // Speed of color interpolation
 
     void Start()
     {
-
         volume = GetComponent<Volume>();
 
         if (volume.profile.TryGet(out vignette))
         {
-            StartCoroutine(ChangeHueOverTime());
+            StartCoroutine(ChangeColorOverTime());
         }
     }
 
-    private IEnumerator ChangeHueOverTime()
+    private IEnumerator ChangeColorOverTime()
     {
-        while (true) // Infinite loop to keep changing hue
+        float t = 0f;
+
+        while (true)
         {
             if (vignette != null)
             {
-                Color currentColor = vignette.color.value;
-                Color newColor = ShiftHue(currentColor, hueSpeed * Time.deltaTime);
-                vignette.color.value = newColor;
+                // PingPong returns a value that goes back and forth between 0 and 1
+                float lerpValue = Mathf.PingPong(t * colorChangeSpeed, 1f);
+                vignette.color.value = Color.Lerp(color1, color2, lerpValue);
+                t += Time.deltaTime;
             }
-            yield return null; // Wait for the next frame
+            yield return null;
         }
     }
-
-    private Color ShiftHue(Color color, float hueShift)
-    {
-        float h, s, v;
-        Color.RGBToHSV(color, out h, out s, out v);
-        h += hueShift / 360f; // Convert degrees to [0,1] range
-        if (h > 1) h -= 1;
-        if (h < 0) h += 1;
-        return Color.HSVToRGB(h, s, v);
-    }
 }
-
-

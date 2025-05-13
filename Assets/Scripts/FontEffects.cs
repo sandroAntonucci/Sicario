@@ -13,6 +13,7 @@ public class PsychedelicTextEffect : MonoBehaviour
     public bool useColorChange = false; // Use color change or not
     public bool useScale = false;
     public bool useScaleForthAndBack = false; // Use scale forth and back or not
+    public bool useFadeOut = false; // Use fade out effect or not
 
     public Color backgroundColorChange;
 
@@ -24,6 +25,8 @@ public class PsychedelicTextEffect : MonoBehaviour
     public float tiltSpeed = 0.5f; // Speed of the tilting effect
     public float finalScale = 1.5f; // Final scale of the text
     public float scaleDuration = 1.0f; // Duration of the scaling effect
+    public float fadeDuration = 1.0f; // Duration of the fade out effect
+
     private Vector3 orbitCenter;
     private float angle = 0f;
 
@@ -51,6 +54,9 @@ public class PsychedelicTextEffect : MonoBehaviour
 
         if (useScaleForthAndBack)
             StartCoroutine(ScaleForthAndBack());
+
+        if (useFadeOut)
+            StartCoroutine(FadeOut());
     }
 
     private IEnumerator ChangeBackgroundOverTime()
@@ -207,6 +213,25 @@ public class PsychedelicTextEffect : MonoBehaviour
 
         }
 
+
+    }
+
+    private IEnumerator FadeOut()
+    {
+
+        Color originalColor = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1);
+        Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            textMeshPro.color = Color.Lerp(originalColor, targetColor, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        textMeshPro.color = targetColor;
 
     }
 

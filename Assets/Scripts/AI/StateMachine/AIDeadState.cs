@@ -24,7 +24,6 @@ public class AIDeadState : AIBaseState
 
         scoreEffect.GetComponentInChildren<TextMeshPro>().text = handler.damageReceived.ToString();
 
-
         Rigidbody rb = handler.GetComponent<Rigidbody>();
 
         if (rb != null)
