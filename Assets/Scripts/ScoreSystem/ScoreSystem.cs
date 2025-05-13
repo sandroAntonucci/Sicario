@@ -105,7 +105,7 @@ public class ScoreSystem : MonoBehaviour
 
     private void AwardPointsEventCallback(int amount, string weapon = "")
     {
-        multiplier = baseMultiplier + (comboList.Count * 0.5f);
+        multiplier = multiplier + 0.5f;
         multiplierTime = baseMultiplierTime;
         scoreToAdd = (uint)(amount * multiplier);
         score += scoreToAdd;

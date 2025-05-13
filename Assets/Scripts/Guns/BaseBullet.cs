@@ -33,6 +33,11 @@ public class BaseBullet : MonoBehaviour
 
     private Coroutine DestroyCoroutine;
 
+    private void Awake()
+    {
+        gameObject.SetActive(false); // Deactivate the bullet initially
+    }
+
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,20 +60,59 @@ public class BaseBullet : MonoBehaviour
 
         if (isEnemyBullet)
         {
-            Vector3 playerDirection = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
-            rb.velocity = playerDirection * speed * 0.1f;
+            if (gun.isShotgun)
+            {
+                // Base direction towards player
+                Vector3 playerDirection = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
+
+                // Add random spread
+                float spreadAngle = 10f; // You can adjust this
+                Vector3 spreadDirection = Quaternion.Euler(
+                    Random.Range(-spreadAngle, spreadAngle),
+                    Random.Range(-spreadAngle, spreadAngle),
+                    0f // Usually we don't rotate on Z for spread
+                ) * playerDirection;
+
+                rb.velocity = spreadDirection.normalized * speed * 0.1f;
+            }
+            else
+            {
+                Vector3 playerDirection = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
+                rb.velocity = playerDirection * speed * 0.1f;
+            }
         }
 
         else
         {
             if (Physics.Raycast(ray, out hit) && !GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAim>().isAiming)
             {
-                Vector3 direction = (hit.point - transform.position).normalized;
-                rb.velocity = direction * speed;
+                if (!gun.isShotgun)
+                {
+                    Vector3 direction = (hit.point - transform.position).normalized;
+                    rb.velocity = direction * speed;
+                }
+                else
+                {
+                    // For shotgun bullets, we want to apply a random spread
+                    Vector3 randomSpread = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+                    Vector3 direction = (hit.point - transform.position).normalized + randomSpread;
+                    rb.velocity = direction * speed;
+                }
             }
             else
             {
-                rb.velocity = transform.right * -1 * speed;
+
+                if (gun.isShotgun)
+                {
+                    Vector3 randomSpread = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+                    Vector3 direction = (cameraHolder.forward).normalized + randomSpread;
+                    rb.velocity = direction * speed;
+                }
+                else
+                {
+                    rb.velocity = cameraHolder.forward * speed;
+                }
+
             }
 
             trailRenderer.enabled = false;

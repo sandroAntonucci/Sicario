@@ -32,6 +32,8 @@ public abstract class BaseGun : BaseWeapon
 
     [SerializeField] private Light shotLight;
 
+    public bool isShotgun = false;
+
     public InputActionAsset PlayerControls;
     private InputAction shootAction;
 
@@ -104,23 +106,48 @@ public abstract class BaseGun : BaseWeapon
 
         StartCoroutine(ShowMuzzleFlash());
 
-        // Get a bullet from the pool
-        GameObject bullet = BulletPool.Instance.GetBullet(shootPosition.position, shootPosition.rotation);
-        BaseBullet bulletComp = bullet.GetComponent<BaseBullet>();
 
-        bulletComp.gun = GetComponent<BaseGun>();
-
-        if (shootSFX != null)
+        if (isShotgun)
         {
-            shootSFX.PlayRandomPitch();
+            for (int i = 0; i < 5; i++)
+            {
+
+                // Get a bullet from the pool
+                GameObject bullet = BulletPool.Instance.GetBullet(shootPosition.position, shootPosition.rotation);
+                BaseBullet bulletComp = bullet.GetComponent<BaseBullet>();
+
+                bulletComp.gun = GetComponent<BaseGun>();
+
+                if (isEnemyWeapon) bulletComp.isEnemyBullet = true;
+                else bulletComp.isEnemyBullet = false;
+
+                bulletComp.bulletDamage = weaponBulletDamage;
+
+                bullet.SetActive(true);
+            }
+        }
+        else
+        {
+            // Get a bullet from the pool
+            GameObject bullet = BulletPool.Instance.GetBullet(shootPosition.position, shootPosition.rotation);
+            BaseBullet bulletComp = bullet.GetComponent<BaseBullet>();
+
+            bulletComp.gun = GetComponent<BaseGun>();
+
+            if (shootSFX != null)
+            {
+                shootSFX.PlayRandomPitch();
+            }
+
+            if (isEnemyWeapon) bulletComp.isEnemyBullet = true;
+            else bulletComp.isEnemyBullet = false;
+
+            bulletComp.bulletDamage = weaponBulletDamage;
+
+            bullet.SetActive(true);
         }
 
-        if (isEnemyWeapon) bulletComp.isEnemyBullet = true;
-        else bulletComp.isEnemyBullet = false;
-
-        bulletComp.bulletDamage = weaponBulletDamage;
-
-        bullet.SetActive(true);
+        
 
         if (!isEnemyWeapon) ApplyRecoil();
     }
