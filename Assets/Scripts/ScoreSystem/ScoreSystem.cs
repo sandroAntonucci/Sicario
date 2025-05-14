@@ -14,6 +14,8 @@ public class ScoreSystem : MonoBehaviour
     private static ScoreSystem _instance;
     private Canvas finalScoreCanvas;
 
+    [SerializeField] private GameObject finalMessage;
+    [SerializeField] private GameObject finalDetection;
 
     // Vars
     public float baseMultiplier = 1;
@@ -79,6 +81,10 @@ public class ScoreSystem : MonoBehaviour
             {
                 totalEnemyHealth += enemy.GetComponent<AIHandler>().health;
             }
+            else
+            {
+                enemiesInLevel = enemiesInLevel.Where(e => e != enemy).ToArray();
+            }
         }
         foreach (GameObject GUN in gunsInLevel)
         {
@@ -128,6 +134,7 @@ public class ScoreSystem : MonoBehaviour
             StopCoroutine(multiplierCoroutine);
         }
         multiplierCoroutine = StartCoroutine(MultiplierCoroutine());
+
     }
 
     private IEnumerator MultiplierCoroutine()
@@ -160,6 +167,35 @@ public class ScoreSystem : MonoBehaviour
 
         multiplierTime = 0;
         comboList.Clear();
+    }
+
+    public void CheckDeadEnemies()
+    {
+
+        bool allEnemiesDead = true;
+
+        foreach (GameObject gO in enemiesInLevel)
+        {
+            if (gO != null)
+            {
+                if (gO.GetComponent<AIHandler>() != null)
+                {
+                    if (!gO.GetComponent<AIHandler>().isDead) allEnemiesDead = false;
+                }
+            }
+        }
+
+        if (allEnemiesDead)
+        {
+            if (finalMessage != null)
+            {
+                finalMessage.SetActive(true);
+                finalDetection.SetActive(true);
+
+                GameManager.Instance.Score = (int)score;
+                GameManager.Instance.LetterGrade = GetScoreLetter();
+            }
+        }
     }
 
     public string GetScoreLetter()

@@ -35,7 +35,7 @@ public class AIDeadState : AIBaseState
 
         handler.weapon.DropWeapon();
         handler.weapon.SetUpPlayerWeapon();
-        
+        ScoreSystem.Instance.CheckDeadEnemies();
     }
 
     public override void UpdateState(AIHandler handler)

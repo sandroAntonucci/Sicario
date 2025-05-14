@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Wololo.unity
-    guid: 131e14083d6332145b384d4691915707
-  - enabled: 1
     path: Assets/Scenes/ExtraEffects.unity
     guid: ecca0d0738ce42c4e826fd76fbb1af62
+  - enabled: 1
+    path: Assets/MOTEL/Scene/ScoreLevel.unity
+    guid: 999facd1cc8e522488bc35dce085e93c
+  - enabled: 1
+    path: Assets/Scenes/Wololo.unity
+    guid: 4762f7661e99c9a4e83897f1b1a10126
   m_configObjects: {}

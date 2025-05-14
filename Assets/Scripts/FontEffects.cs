@@ -14,6 +14,8 @@ public class PsychedelicTextEffect : MonoBehaviour
     public bool useScale = false;
     public bool useScaleForthAndBack = false; // Use scale forth and back or not
     public bool useFadeOut = false; // Use fade out effect or not
+    public bool useTypingMachineEffect = false; // Use typing machine effect or not
+    public bool useSideEffect = false; // Use side effect or not
 
     public Color backgroundColorChange;
 
@@ -26,6 +28,8 @@ public class PsychedelicTextEffect : MonoBehaviour
     public float finalScale = 1.5f; // Final scale of the text
     public float scaleDuration = 1.0f; // Duration of the scaling effect
     public float fadeDuration = 1.0f; // Duration of the fade out effect
+
+    public Vector2 finalRectPosition;
 
     private Vector3 orbitCenter;
     private float angle = 0f;
@@ -57,6 +61,12 @@ public class PsychedelicTextEffect : MonoBehaviour
 
         if (useFadeOut)
             StartCoroutine(FadeOut());
+
+        if (useTypingMachineEffect)
+            StartCoroutine(TypingMachineEffect());
+
+        if (useSideEffect)
+            StartCoroutine(SideEffect());
     }
 
     private IEnumerator ChangeBackgroundOverTime()
@@ -98,7 +108,7 @@ public class PsychedelicTextEffect : MonoBehaviour
 
             transform.position = orbitCenter + new Vector3(x, y, 0);
 
-            float tiltAngle = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAmount; 
+            float tiltAngle = Mathf.Sin(elapsedTime * tiltSpeed) * tiltAmount;
             transform.rotation = Quaternion.Euler(0, 0, tiltAngle);
 
             elapsedTime += Time.deltaTime;
@@ -235,4 +245,42 @@ public class PsychedelicTextEffect : MonoBehaviour
 
     }
 
+    private IEnumerator TypingMachineEffect()
+    {
+
+        string originalText = textMeshPro.text;
+        textMeshPro.text = "";
+
+        for (int i = 0; i < originalText.Length; i++)
+        {
+            textMeshPro.text += originalText[i];
+            yield return new WaitForSeconds(0.1f);
+        }
+
+    }
+
+    private IEnumerator SideEffect()
+    {
+        float elapsed = 0f;
+        float duration = 0.5f;
+
+        RectTransform rectTransform = GetComponent<RectTransform>();
+
+        Vector2 startPos = rectTransform.anchoredPosition;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            rectTransform.anchoredPosition = Vector2.Lerp(startPos, finalRectPosition, EaseOutCubic(t));
+            yield return null;
+        }
+
+    }
+
+    // Optional: Ease-out cubic for smoother motion
+    private float EaseOutCubic(float t)
+    {
+        return 1f - Mathf.Pow(1f - t, 3);
+    }
 }
