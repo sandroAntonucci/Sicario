@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/MOTEL/Scene/ScoreLevel.unity
     guid: 999facd1cc8e522488bc35dce085e93c
   - enabled: 1
-    path: Assets/Scenes/Wololo.unity
+    path: Assets/Scenes/Level 1.unity
     guid: 4762f7661e99c9a4e83897f1b1a10126
   m_configObjects: {}
