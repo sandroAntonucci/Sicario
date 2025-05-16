@@ -24,7 +24,7 @@ public class UpdateFinalScore : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
 }

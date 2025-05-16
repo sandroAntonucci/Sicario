@@ -128,7 +128,7 @@ public class BaseBullet : MonoBehaviour
 
         if (Physics.Raycast(transform.position, rb.velocity.normalized, out hit, detectionDistance) && !isEnemyBullet) 
         { 
-            if (hit.collider.CompareTag("Enemy") && canDamage)
+            if (hit.collider.CompareTag("Enemy") || (hit.collider.CompareTag("Gun") && hit.collider.GetComponent<BaseGun>().isEnemyWeapon) && canDamage)
             {
 
 
