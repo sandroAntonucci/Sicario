@@ -85,7 +85,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        Application.Quit();
     }
 
 }
