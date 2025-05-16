@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 1102774137502429940}
   - component: {fileID: 3483967573458759830}
   - component: {fileID: 8282684539608801520}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,10 +93,10 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -238,6 +238,8 @@ MonoBehaviour:
   useScale: 1
   useScaleForthAndBack: 0
   useFadeOut: 0
+  useTypingMachineEffect: 0
+  useSideEffect: 0
   backgroundColorChange: {r: 0, g: 0, b: 0, a: 0}
   textureScrollSpeed: 0.5
   orbitSpeed: 10
@@ -248,3 +250,4 @@ MonoBehaviour:
   finalScale: 1.4
   scaleDuration: 0.6
   fadeDuration: 1
+  finalRectPosition: {x: 0, y: 0}

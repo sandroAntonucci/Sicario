@@ -26,7 +26,7 @@ public class ScorePointsEffect : MonoBehaviour
         float duration = 1f;
         float elapsedTime = 0f;
 
-        Vector3 startPosition = transform.position - new Vector3(0, -3, 0);
+        Vector3 startPosition = transform.position - new Vector3(0, -1f, 0);
         Vector3 targetPosition = startPosition + new Vector3(0, 1.5f, 0);
 
         while (elapsedTime < duration)
