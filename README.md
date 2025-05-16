@@ -5,8 +5,13 @@ Sicario es un First Person Shooter (FPS) centrado en la acción frenética, el c
 Controles: 
 
 WASD - Movimiento
+
 Click derecho - Apuntar
+
 Click izquierdo - Disparar
+
 E - Interacción / Tirar arma
+
 Esc - Menú de pausa
+
 Espacio - Deslizamiento
