@@ -47,8 +47,10 @@ public class AIChasingState : AIBaseState
 
         yield return new WaitForSeconds(recognitionTime);
 
+        if (agent != null && agent.isActiveAndEnabled) agent.isStopped = false;
+
         // Resume movement/attack after recognition
-        agent.isStopped = false;
+
         canAttack = true;
         isRecognizing = false;
     }

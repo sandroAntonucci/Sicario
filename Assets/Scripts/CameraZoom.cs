@@ -18,16 +18,29 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private Camera zoomCamera;
     public bool isZooming = false;
 
-    
+    public Coroutine currentCoroutine;
+
+    public void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
+
 
     public void ZoomIn()
     {
-        StartCoroutine(CameraZoomIn());
+        if (gameObject != null)
+        {
+            StartCoroutine(CameraZoomIn());
+        }
     }
 
     public void ZoomOut()
     {
-        StartCoroutine(CameraZoomOut());
+        if (gameObject != null)
+        {
+            StartCoroutine(CameraZoomOut());
+        }
     }
 
     private IEnumerator CameraZoomIn()

@@ -19,6 +19,8 @@ public class LevelSelector : MonoBehaviour
 
     private Image currentLevelImage;
 
+    [SerializeField] private GameObject board;
+
 
     private void Awake()
     {
@@ -67,6 +69,7 @@ public class LevelSelector : MonoBehaviour
 
     public void LoadLevel()
     {
+        Destroy(board);
         SceneManager.LoadScene(2);
     }
 

@@ -20,6 +20,14 @@ public class InteractableBoard : InteractableItem
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    public void OnDestroy()
+    {
+
+        interactionCamera.SetActive(false);
+        interactAction.Disable();
+        StopAllCoroutines();
+    }
+
     public override void Interaction()
     {
 
@@ -48,19 +56,27 @@ public class InteractableBoard : InteractableItem
     {
         if (cameraZoom.isZooming) return;
 
-        levelSelector.SetActive(false);
+        if (levelSelector != null)
+        {
+            levelSelector.SetActive(false);
+        }
+        if (cameraZoom != null)
+        {
+            cameraZoom.ZoomOut();
 
-        cameraZoom.ZoomOut();
+            StartCoroutine(ResetInteraction());
+        }
 
-        StartCoroutine(ResetInteraction());
     }
 
     private IEnumerator ResetInteraction()
     {
-        while (cameraZoom.isZooming)
+        while (cameraZoom.isZooming && cameraZoom != null)
         {
             yield return null;
         }
+
+        if (cameraZoom == null) yield break;
 
         base.StopInteraction();
 
@@ -75,10 +91,12 @@ public class InteractableBoard : InteractableItem
 
     private IEnumerator ActivateLevelSelector()
     {
-        while (cameraZoom.isZooming)
+        while (cameraZoom.isZooming && cameraZoom != null)
         {
             yield return null;
         }
+
+        if (cameraZoom == null) yield break;
 
         levelSelector.SetActive(true);
     }

@@ -73,6 +73,11 @@ public class PauseMenu : MonoBehaviour
             pauseCanvas.enabled = false;
         }
 
+        if (optionsMenu != null && optionsMenu.activeSelf)
+        {
+            optionsMenu.SetActive(false);
+        }
+
         Time.timeScale = 1f;
         isPaused = false;
         PlayerControls.FindActionMap("Player").FindAction("Shoot").Enable();

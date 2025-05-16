@@ -8,7 +8,7 @@ public class InteractableItem : MonoBehaviour
 
     [SerializeField] private InputActionAsset playerInput;
 
-    private InputAction interactAction;
+    protected InputAction interactAction;
 
     public string interactionText;
 

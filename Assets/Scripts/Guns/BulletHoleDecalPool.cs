@@ -51,6 +51,8 @@ public class BulletHoleDecalPool : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
+        if (bulletHole == null) yield break;
+
         while (bulletHole.transform.localScale.x > 0)
         {
             bulletHole.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
