@@ -15,6 +15,8 @@ public abstract class BaseGun : BaseWeapon
 
     public Vector3 aimPosition;
 
+    bool shootSoundActive;
+
     public float fireRate;
     public int maxAmmo;
     public int currentAmmo;
@@ -134,10 +136,7 @@ public abstract class BaseGun : BaseWeapon
 
             bulletComp.gun = GetComponent<BaseGun>();
 
-            if (shootSFX != null)
-            {
-                shootSFX.PlayRandomPitch();
-            }
+            
 
             if (isEnemyWeapon) bulletComp.isEnemyBullet = true;
             else bulletComp.isEnemyBullet = false;
@@ -147,7 +146,11 @@ public abstract class BaseGun : BaseWeapon
             bullet.SetActive(true);
         }
 
-        
+        if (shootSFX != null)
+        {
+            shootSFX.PlayRandomPitch();
+        }
+
 
         if (!isEnemyWeapon) ApplyRecoil();
     }
@@ -244,7 +247,7 @@ public abstract class BaseGun : BaseWeapon
                     Destroy(bloodEffect, 2f);
                 }
 
-                if (hitBodySFX != null)
+                if (hitBodySFX != null && shootSoundActive)
                 {
                     hitBodySFX.PlayRandomPitch();
                 }
@@ -256,6 +259,15 @@ public abstract class BaseGun : BaseWeapon
                 }
             }
         }
+
+    }
+
+    private IEnumerator SoundCooldown()
+    {
+
+        shootSoundActive = false;
+        yield return new WaitForSeconds(1f);
+        shootSoundActive = true;
 
     }
 }
