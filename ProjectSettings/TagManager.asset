@@ -17,6 +17,7 @@ TagManager:
   - PauseInterface
   - Hitmarker
   - Slider
+  - BackgroundMusic
   layers:
   - Default
   - TransparentFX
