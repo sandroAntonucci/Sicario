@@ -83,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f0b0f76a95915e4b8227c3dc3d06adf, type: 3}
       propertyPath: m_Name
-      value: Modulo_Pared_Puerta
+      value: Puerta_Cristal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
