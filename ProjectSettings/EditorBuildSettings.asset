@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ExtraEffects.unity
-    guid: ecca0d0738ce42c4e826fd76fbb1af62
+    path: Assets/MOTEL/Scene/MainMenu.unity
+    guid: 70179a98293ad9547b9cbed0d1a47650
   - enabled: 1
-    path: Assets/MOTEL/Scene/ScoreLevel.unity
-    guid: 999facd1cc8e522488bc35dce085e93c
-  - enabled: 1
-    path: Assets/Scenes/Level 1.unity
-    guid: 4762f7661e99c9a4e83897f1b1a10126
+    path: Assets/MOTEL/Scene/Motel.unity
+    guid: 1662182bdb19c9e4db73dfcb9991d526
   m_configObjects: {}
